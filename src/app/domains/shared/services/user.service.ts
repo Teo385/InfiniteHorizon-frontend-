@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { map, Observable, tap } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 import { User } from '../models/user.model';
  
 @Injectable({
@@ -26,4 +26,28 @@ export class UserService {
   buscarPersona(nombreCompleto: string): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}/buscar/${nombreCompleto}`);
   }
+
+  saveUser(user: User): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return new Observable(observer => {
+      this.http.post<any>(`${this.baseUrl}/save`, user, { headers: headers })
+        .subscribe({
+          next: (response) => {
+            observer.next(response);
+          },
+          error: (error) => {
+            observer.error(error);
+          },
+          complete: () => {
+            observer.complete();
+          }
+        });
+    });
+  }
+
+
+  deleteUser(idUsuario: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/delete/${idUsuario}`);
+  }
+  
 }

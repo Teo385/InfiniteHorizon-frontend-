@@ -1,9 +1,10 @@
 import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { Observable } from 'rxjs';
-import { User } from '../../shared/models/user.model';
+import { Genero, User } from '../../shared/models/user.model';
 import { UserService } from '../../shared/services/user.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 
 @Component({
@@ -14,27 +15,103 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './tables.component.css'
 })
 export default class TablesComponent {
+
+
   private userService = inject(UserService);
 
   nombreCompleto: string = '';
   usuariosFiltrados: User[] = [];
   personas$!: Observable<User[]>;
-
+  users: User[] = [];
   
+   /* ------------------------------------------------------------------------- */
+
+  user: User = {
+    idUsuario: 0,
+    nombre: '',
+    apellido: '',
+    cedula: '',
+    contrasena: '',
+    fechaNacimiento: new Date(),
+    genero: Genero.M,
+    direccion: '',
+    correo: '',
+    telefono: '',
+  };
+
+
+  confirmacionContrasena: string = '';
+
+  passwordsMatch(): boolean {
+    return this.user.contrasena === this.confirmacionContrasena;
+  }
+
+  saveUser(): void {
+    if (this.passwordsMatch()) {
+      this.userService.saveUser(this.user)
+        .subscribe({
+          next: (response) => {
+            console.log('Usuario guardado correctamente', response);
+            this.closeModal()
+          },
+          error: (error) => {
+            console.error('Error al guardar el usuario', error);
+          }
+        });
+    } else {
+      console.error('Las contraseñas no coinciden.');
+    }
+  }
+
+   /* ------------------------------------------------------------------------- */
+
+   deleteUser(userId: number) {
+    if (confirm('Estas seguro que quieres eliminar este usuario?')) {
+        this.userService.deleteUser(userId)
+            .subscribe({
+                next: () => {
+                    console.log('Usuario borrado');
+                    this.getUsers();
+                    
+                    alert('Usuario borrado');
+                },
+                error: (error) => {
+                    console.error('Error deleting user', error);
+                }
+            });
+    }
+}
+
+
+   /* ------------------------------------------------------------------------- */
+
   buscar() {
     if (this.nombreCompleto.trim() !== '') {
       this.personas$ = this.userService.buscarPersona(this.nombreCompleto);
       this.personas$.subscribe(users => {
-        this.usuariosFiltrados = users; 
-        console.log('Estoy en el filtro')
-        console.log(users)
+        this.usuariosFiltrados = users;
       });
     } else {
       this.usuariosFiltrados = this.users; 
-      console.log('Estoy sin filtro')
-      console.log(this.users)
     }
   }
+
+ /* ------------------------------------------------------------------------- */
+
+
+  modalVisible: boolean = false;
+
+  openModal() {
+    this.modalVisible = true;
+    console.log("abrir")
+  }
+
+  closeModal() {
+    this.modalVisible = false;
+  }
+
+
+  
 
   /* ------------------------------------------------------------------------- */
 
@@ -42,17 +119,16 @@ export default class TablesComponent {
     return `https://picsum.photos/id/${idUsuario}/200/200`;
   }
 
+
+  /* ------------------------------------------------------------------------- */
+
   menuVisible: boolean = false;
 
   toggleMenu() {
     this.menuVisible = !this.menuVisible;
   }
   
-
-  @Input({required: true}) user!: User;
-  
-  users: User[] = [];
-  
+  /* ------------------------------------------------------------------------- */
 
   
   getUsers() {
@@ -66,6 +142,10 @@ export default class TablesComponent {
   ngOnInit() {
     this.getUsers();
   }
+
+
+
+
   }
 
   
