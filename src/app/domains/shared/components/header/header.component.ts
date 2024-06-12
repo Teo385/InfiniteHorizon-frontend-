@@ -1,4 +1,3 @@
-import { HtmlParser } from '@angular/compiler';
 import { Component } from '@angular/core';
 
 @Component({
@@ -10,5 +9,4 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
 
- 
 }

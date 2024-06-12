@@ -7,13 +7,37 @@ export const routes: Routes = [
        component: LayoutComponent,
        children:[
         {
-            path: 'home',
-            loadComponent: () => import('./domains/users/pages/user-list/user-list.component')
+            path: '',
+            loadComponent: () => import('./domains/business/home/home.component')
+        },
+        {
+            path: 'user',
+            loadComponent: () => import('./domains/business/users/pages/user-list/user-list.component')
+        },
+        {
+            path: 'dashboard',
+            loadComponent: () => import('./domains/business/dashboard/dashboard.component')
+        },
+        {
+            path: 'profile',
+            loadComponent: () => import('./domains/business/profile/profile.component')
+        },
+        {
+            path: 'tables',
+            loadComponent: () => import('./domains/business/profesores/tables.component')
         },
         {
             path: '',
-            loadComponent: () => import('./domains/home/home.component')
+            redirectTo: 'dashboard',
+            pathMatch: 'full'
         }
-       ]
-    }
+
+    ]
+},
+{
+    path: '**',
+    redirectTo: 'dashboard'
+}
 ];
+
+  
