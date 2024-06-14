@@ -4,7 +4,7 @@ import { Genero, User } from '../../shared/models/user.model';
 import { UserService } from '../../shared/services/user.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
-import { Action } from 'rxjs/internal/scheduler/Action';
+
 
 
 @Component({

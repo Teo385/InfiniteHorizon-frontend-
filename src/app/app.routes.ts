@@ -20,7 +20,7 @@ export const routes: Routes = [
         },
         {
             path: 'profile',
-            loadComponent: () => import('./domains/business/profile/profile.component')
+            loadComponent: () => import('./domains/business/Estudiantes/profile.component')
         },
         {
             path: 'tables',
