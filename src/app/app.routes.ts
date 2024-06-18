@@ -16,7 +16,7 @@ export const routes: Routes = [
         },
         {
             path: 'dashboard',
-            loadComponent: () => import('./domains/business/dashboard/dashboard.component')
+            loadComponent: () => import('./domains/business/Empleados/dashboard.component')
         },
         {
             path: 'profile',

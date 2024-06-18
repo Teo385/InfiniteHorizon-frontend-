@@ -22,9 +22,29 @@ import { UserService } from '../../../../shared/services/user.service';
     modalVisibleA: boolean = false;
     selectedUserId: number | null = null;
   
+
+    /* ------------------------------------------------------------------------- */
+  
+    
+    getUsers() {
+      this.userService.getUsers().subscribe(users => {
+        this.users = users;
+        this.usuariosFiltrados = users;
+      });
+      
+    }
+    
+  
+    ngOnInit() {
+      this.getUsers();
+      this.loadUsers();
+    }
+ 
+
+    /* ------------------------------------------------------------------------- */
+  
     constructor(
       private fb: FormBuilder,
-      
     ) {
       this.userForm = this.fb.group({
         nombre: ['', Validators.required],
@@ -190,12 +210,7 @@ import { UserService } from '../../../../shared/services/user.service';
       this.modalVisible = true;
     }
   
-   
-  
-    /*--------------------------------------------------------------------- */
-  
-  
-    
+     
   
     /* ------------------------------------------------------------------------- */
   
@@ -214,27 +229,7 @@ import { UserService } from '../../../../shared/services/user.service';
     
     /* ------------------------------------------------------------------------- */
   
-    
-    getUsers() {
-      this.userService.getUsers().subscribe(users => {
-        this.users = users;
-        this.usuariosFiltrados = users;
-      });
-      
-    }
-  
-    ngOnInit() {
-      this.getUsers();
-      this.loadUsers();
-    }
-  
-  
-  
-  
-    }
-  
-    
-  
+  }  
   
   
   // searchUsers() {

@@ -1,0 +1,45 @@
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg  mt-20">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-sm text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3">
+            Empleado
+          </th>
+          <th scope="col" class="px-6 py-3">
+            cargo
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Area
+          </th>         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let empleados of empleado; let i = index"
+          class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+            <img class="w-10 h-10 rounded-full" [src]="getProfileImage(empleados.idUsuario + 150)" alt="image">
+            <div class="ps-3">
+              <div class="text-base font-semibold">{{ empleados.nombreEmpleado + ' ' + empleados.apellidoEmpleado }}
+              </div>
+            </div>
+          </th>
+          <td class="px-6 py-4">
+            {{empleados.cargo}}
+          </td>
+          <td class="px-6 py-4">
+            {{empleados.area}}
+          </td>
+          <td class="px-6 py-4">
+            <button
+              class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-cyan-500 to-blue-500 group-hover:from-cyan-500 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-cyan-200 dark:focus:ring-cyan-800">
+              <span
+                class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                Asignación
+              </span>
+            </button>
+          </td>
+          
+        </tr>
+      </tbody>
+    </table>
+  </div>

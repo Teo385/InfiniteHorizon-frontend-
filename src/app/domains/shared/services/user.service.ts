@@ -2,25 +2,25 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from '../models/user.model';
- 
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
- 
+
   private http = inject(HttpClient);
   private baseUrl = 'http://localhost:8080/api/usuario'
-    
+
   constructor() { }
- 
-  getUsers () {
+
+  getUsers() {
     const url = new URL(`${this.baseUrl}/all`)
     return this.http.get<User[]>(url.toString());
   }
- 
-  getUserById (idUsuario?: number) {
+
+  getUserById(idUsuario?: number) {
     return this.http.get<User[]>(`${this.baseUrl}/id/${idUsuario}`)
-    .pipe(map((user) => user[0]));
+      .pipe(map((user) => user[0]));
   }
 
   buscarPersona(nombreCompleto: string): Observable<User[]> {
@@ -53,5 +53,5 @@ export class UserService {
   updateUser(idUsuario: number, user: User): Observable<User> {
     return this.http.put<User>(`${this.baseUrl}/update/${idUsuario}`, user);
   }
-  
+
 }

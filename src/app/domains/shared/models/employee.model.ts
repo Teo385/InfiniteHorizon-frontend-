@@ -1,7 +1,8 @@
 export interface Empleado {
-    idEmpleado:        number;
-    fkIdUsuario:       number;
-    area:              string;
-    fechaContratacion: Date;
-    cargo:             string;
+    idUsuario:        number;
+    nombreEmpleado:   string;
+    apellidoEmpleado: string;
+    cargo:            string;
+    area:             string;
 }
+
