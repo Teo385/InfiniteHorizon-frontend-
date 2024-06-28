@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StudentDTO } from '../models/studentDTO.model';
 import { Estudiante } from '../models/student.model';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -19,9 +20,8 @@ export class StudentDTOservice {
     return this.http.get<StudentDTO[]>(url.toString());
   }
 
-  getStudent() {
-    const url = new URL(`http://localhost:8080/api/estudiante/all`)
-    return this.http.get<Estudiante[]>(url.toString());
+  obtenerEstudiantesPorCurso(nombresCursos: string): Observable<StudentDTO[]> {
+    return this.http.get<StudentDTO[]>(`${this.baseUrl}/curso/${nombresCursos}`);
   }
 
 

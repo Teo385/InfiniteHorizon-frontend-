@@ -8,5 +8,6 @@ export interface StudentDTO {
     numeroAula:         number;
     pisoAula:           string;
     edificioAula:       string;
+    notaFinal: number;
     fkIdUsuario:  number;
 }
