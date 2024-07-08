@@ -22,7 +22,6 @@ import { UserService } from '../../../../shared/services/user.service';
     modalVisibleA: boolean = false;
     selectedUserId: number | null = null;
   
-
     /* ------------------------------------------------------------------------- */
   
     
