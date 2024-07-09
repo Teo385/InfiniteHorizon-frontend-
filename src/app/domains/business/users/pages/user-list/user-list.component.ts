@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output, signal, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -30,7 +30,6 @@ import { UserService } from '../../../../shared/services/user.service';
         this.users = users;
         this.usuariosFiltrados = users;
       });
-      
     }
     
   

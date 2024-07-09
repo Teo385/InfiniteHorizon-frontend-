@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { StudentDTO } from '../models/studentDTO.model';
-import { Estudiante } from '../models/student.model';
 import { Observable } from 'rxjs';
 
 

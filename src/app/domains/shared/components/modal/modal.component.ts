@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { StudentDTO } from '../../models/studentDTO.model';
 
 @Component({
@@ -11,12 +11,11 @@ import { StudentDTO } from '../../models/studentDTO.model';
 })
 export class ModalComponent {
   
-  @Input() estudiante: any;
-  studentdto: StudentDTO[] = [];
+  @Input() estudiante: StudentDTO | null = null;
+  @Output() close = new EventEmitter<void>();
 
   closeModal()  {
     this.estudiante = null;
+    this.close.emit();
   }
 }
-
-

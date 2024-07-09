@@ -1,23 +1,22 @@
-import { Component, Input, inject, signal } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentDTO } from '../../shared/models/studentDTO.model';
 import { StudentDTOservice } from '../../shared/services/student.service';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 
-
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule,  ModalComponent],
+  imports: [CommonModule, ModalComponent],
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrls: ['./profile.component.css']
 })
 export default class ProfileComponent {
 
-  @Input({required: true}) studentsto!: StudentDTO;
+  @Input({ required: true }) studentsto!: StudentDTO;
 
   studentdto: StudentDTO[] = [];
-  estudianteSeleccionado:  StudentDTO| null = null;
+  estudianteSeleccionado: StudentDTO | null = null;
 
   private studentDTOservice = inject(StudentDTOservice);
 
@@ -42,5 +41,4 @@ export default class ProfileComponent {
   cerrarModal(): void {
     this.estudianteSeleccionado = null;
   }
-  
 }
